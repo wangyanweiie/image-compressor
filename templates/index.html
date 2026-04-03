@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片压缩工具 - 高效压缩图片，保持最佳质量</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                    <rect width="40" height="40" rx="8" fill="#22c55e"/>
+                    <path d="M15 25V15L25 20L15 25Z" fill="white"/>
+                </svg>
+                <h1>图片压缩工具</h1>
+            </div>
+            <p class="subtitle">高效压缩图片，保持最佳质量</p>
+        </header>
+
+        <main>
+            <!-- 上传区域 -->
+            <section class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <svg class="upload-icon" width="64" height="64" viewBox="0 0 64 64" fill="none">
+                        <circle cx="32" cy="32" r="28" stroke="#22c55e" stroke-width="4" stroke-dasharray="4 4"/>
+                        <path d="M32 20V44M32 20L20 32M32 20L44 32" stroke="#22c55e" stroke-width="4" stroke-linecap="round"/>
+                    </svg>
+                    <h3>拖放图片到此处或点击上传</h3>
+                    <p class="upload-hint">支持 JPG、PNG、WebP 格式，单个文件最大 16MB</p>
+                    <button class="upload-btn" type="button">选择图片</button>
+                    <input type="file" id="fileInput" multiple accept="image/*" hidden>
+                </div>
+            </section>
+
+            <!-- 压缩设置 -->
+            <section class="settings-section" id="settingsSection" style="display: none;">
+                <h2>压缩设置</h2>
+                <div class="settings-container">
+                    <div class="quality-presets">
+                        <h3>预设质量</h3>
+                        <div class="preset-buttons">
+                            <button class="preset-btn high" data-quality="90">
+                                <span class="preset-icon">📸</span>
+                                <span>高质量</span>
+                                <span class="quality-desc">90% 压缩率</span>
+                            </button>
+                            <button class="preset-btn medium" data-quality="75">
+                                <span class="preset-icon">⚡</span>
+                                <span>中等质量</span>
+                                <span class="quality-desc">75% 压缩率</span>
+                            </button>
+                            <button class="preset-btn low" data-quality="60">
+                                <span class="preset-icon">🚀</span>
+                                <span>低质量</span>
+                                <span class="quality-desc">60% 压缩率</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="quality-custom">
+                        <h3>自定义质量</h3>
+                        <div class="quality-slider">
+                            <input type="range" id="qualitySlider" min="10" max="100" value="75">
+                            <div class="slider-value">
+                                <span id="qualityValue">75</span>%
+                            </div>
+                        </div>
+                    </div>
+                    <button class="compress-btn" id="compressBtn" disabled>开始压缩</button>
+                </div>
+            </section>
+
+            <!-- 图片列表 -->
+            <section class="images-section" id="imagesSection" style="display: none;">
+                <h2>压缩结果</h2>
+                <div class="images-grid" id="imagesGrid"></div>
+            </section>
+        </main>
+
+        <!-- 加载提示 -->
+        <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+            <div class="loading-content">
+                <div class="spinner"></div>
+                <p>正在压缩图片...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast 提示 -->
+    <div class="toast" id="toast"></div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
