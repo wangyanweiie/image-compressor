@@ -10,6 +10,9 @@ COPY requirements.txt .
 # 安装依赖
 RUN pip install --no-cache-dir -r requirements.txt
 
+# 安装 gunicorn
+RUN pip install --no-cache-dir gunicorn
+
 # 复制应用文件
 COPY . .
 
@@ -20,4 +23,4 @@ RUN mkdir -p uploads
 EXPOSE 5000
 
 # 启动应用
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "4", "--timeout", "120", "app:app"]
+CMD gunicorn --bind 0.0.0.0:$PORT --workers 1 --timeout 120 app:app
